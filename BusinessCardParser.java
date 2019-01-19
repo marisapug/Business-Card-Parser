@@ -19,20 +19,25 @@ import java.util.List;
 public class BusinessCardParser {
     private ContactInfo contact;
     
+    // Getter
     ContactInfo getContactInfo(){
         return this.contact;
     }
     
+    // Prints name, phone, email in desired format
     public void printContact(){
         System.out.println("Name: " + " " + this.getContactInfo().getName());
         System.out.println("Phone: " + " " + this.getContactInfo().getPhoneNumber());
         System.out.println("Email: " + " " + this.getContactInfo().getEmailAddress());
     }
     
+    // Removes all non-numeric characters from the phone string
     String removeNonNumeric(String s){
         return s.replaceAll("[^0-9]", "");
     }
     
+    // Reads in the .txt file to store the business card contents as a single string.
+    // Each line is separated by a \n
     public static String readTxtFileToString(String fileName) throws IOException {
         String content = "";
         BufferedReader br = new BufferedReader(new FileReader(fileName));
@@ -126,19 +131,16 @@ public class BusinessCardParser {
         return email;
     }
     
+    // Setter
     void setContact(String d){
         String na = extractName(d);
         String ph = extractPhone(d);
         String ea = extractEmail(d);
         ContactInfo c = new ContactInfo(na, ph, ea);
         this.contact = c;
-    }
+    }   
     
-    ContactInfo getContact(){
-        return this.contact;
-    }
-    
-    
+    // Main requires 1 command line argument, the name of the .txt file
     public static void main(String[] args){
         String file = args[0];
         String businessCard = "";
